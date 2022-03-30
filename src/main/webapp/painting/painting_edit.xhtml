@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{paintingEdit.id}" required="true"/>
+        <f:viewAction action="#{paintingEdit.init()}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <h:panelGroup layout="block">
+            <article class="text--justified">
+                <header><h2>Edit painting info</h2></header>
+                <h:form class="painting__form">
+                    <h:outputLabel for="name" value="Name:"/>
+                    <h:inputText class="ui-control ui-input" id="name" value="#{paintingEdit.painting.name}"/>
+                    <h:outputLabel for="description" value="Description:"/>
+                    <h:inputTextarea class="ui-control ui-input" id="description" value="#{paintingEdit.painting.description}"/>
+                    <h:outputLabel for="likes" value="Likes:"/>
+                    <h:inputText class="ui-control" id="likes" value="#{paintingEdit.painting.likes}"/>
+                    <!--<h:outputLabel for="artist" value="Artist:"/>
+                    <h:selectOneListbox class="ui-control" id="artist" value="#{paintingEdit.painting.artist}">
+                        <f:selectItems value="#{artistList.artists.artists}" var="a" itemLabel="#{a.name}" />
+                    </h:selectOneListbox>-->
+                    <h:commandButton class="ui-control ui-button" value="Update"
+                                     action="#{paintingEdit.saveAction()}">
+                        <f:ajax execute="@form" render="@form"/>
+                    </h:commandButton>
+                    <h:messages/>
+                </h:form>
+            </article>
+
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>

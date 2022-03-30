@@ -1,0 +1,112 @@
+###
+
+GET http://localhost:9081/paintings/api/paintings
+
+
+###
+
+GET http://localhost:9081/paintings/api/artists
+Authorization: Basic a2FtaWw6dXNlcnVzZXI=
+
+###
+
+// @no-cookie-jar
+GET http://localhost:9081/paintings/api/users
+Authorization: Basic a2V2aW46dXNlcnVzZXI=
+//WWW-Authenticate: Basic realm="user-Realm"
+
+###
+
+GET http://localhost:9081/paintings/api/artists/Leo
+
+
+###
+
+
+POST http://localhost:9081/paintings/api/artists
+
+Content-Type: application/json
+
+{
+  "name": "Leo23",
+  "birthDate": "1998-01-02",
+  "isAlive": false
+}
+
+###
+
+GET http://localhost:9081/paintings/api/artists/Sigrid
+
+
+###
+
+PUT http://localhost:9081/paintings/api/artists/Leo
+Content-Type: application/json
+
+{
+  "birthDate": "2021-10-26",
+  "isAlive": true
+}
+
+###
+
+DELETE http://localhost:9081/paintings/api/artists/Leo
+
+
+###
+
+GET http://localhost:9081/paintings/api/artists/Leo/paintings
+
+
+###
+
+GET http://localhost:9081/paintings/api/artists/Leo/paintings/2
+
+
+###
+
+
+POST http://localhost:9081/paintings/api/paintings
+Content-Type: application/json
+
+{
+  "name": "nazwa nowego obrazu",
+  "creationDate": "2021-10-26",
+  "description": "nowy opis",
+  "likes": 100,
+  "artist": "Leo"
+}
+
+###
+
+PUT http://localhost:9081/paintings/api/paintings/7
+Content-Type: application/json
+
+{
+  "name": "nazwa nowego obrazu",
+  "likes": 13
+}
+
+###
+
+DELETE http://localhost:9081/paintings/api/paintings/1
+
+
+
+###
+
+// @no-cookie-jar
+POST http://localhost:9081/paintings/api/users
+Content-Type: application/json
+
+{
+  "login": "bob",
+  "name": "Bob",
+  "surname": "Just Bob",
+  "birthDate": "1980-12-11",
+  "password": "useruser",
+  "email": "bob@example.com"
+}
+
+###
+

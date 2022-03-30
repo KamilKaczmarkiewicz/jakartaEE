@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <ui:define name="content">
+        <h:panelGroup layout="block">
+            <article class="text--justified">
+                <header><h2>Artists</h2></header>
+                <h:dataTable value="#{artistList.artists.artists}" var="artist" styleClass="data-table">
+                    <h:column>
+                        <f:facet name="header">nazwa</f:facet>
+                        <h:outputText value="#{artist.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">podgląd</f:facet>
+                        <h:link outcome="/artist/artist_view.xhtml" value="podgląd">
+                            <f:param name="name" value="#{artist.name}"/>
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">edytuj</f:facet>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">usuń</f:facet>
+                        <h:form>
+                            <h:commandButton styleClass="ui-button ui-control" value="usuń"
+                                             action="#{artistList.deleteAction(artist)}"/>
+                        </h:form>
+                    </h:column>
+                </h:dataTable>
+            </article>
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>

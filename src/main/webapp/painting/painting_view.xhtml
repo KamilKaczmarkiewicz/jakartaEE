@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{paintingView.id}" required="true"/>
+        <f:viewAction action="#{paintingView.init()}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <h:panelGroup layout="block">
+            <article class="text--justified">
+                <header><h2><h:outputText value="#{paintingView.painting.name}"/></h2></header>
+                <div class="painting__grid">
+                    <h3>
+                        Data utworzenia: <h:outputText styleClass="" value="#{paintingView.painting.creationDate}"/>
+                    </h3>
+                    <h3>
+                        Opis: <h:outputText styleClass="" value="#{paintingView.painting.description}"/>
+                    </h3>
+                    <h3>
+                        Liczba polubień: <h:outputText styleClass="" value="#{paintingView.painting.likes}"/>
+                    </h3>
+                    <h3>
+                        Artysta: <h:outputText styleClass="" value="#{paintingView.painting.artist}"/>
+                    </h3>
+                    <h3>
+                        Wersja: <h:outputText styleClass="" value="#{paintingView.painting.version}"/>
+                    </h3>
+                    <h3>
+                        CreationDB: <h:outputText styleClass="" value="#{paintingView.painting.creationDateTime}"/>
+                    </h3>
+                    <h3>
+                        EditDB: <h:outputText styleClass="" value="#{paintingView.painting.lastEditDateTime}"/>
+                    </h3>
+                </div>
+
+            </article>
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>

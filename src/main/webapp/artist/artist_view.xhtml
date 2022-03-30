@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="name" value="#{artistView.name}" required="true"/>
+        <f:viewAction action="#{artistView.init()}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <h:panelGroup layout="block">
+            <article class="text--justified">
+                <header><h2><h:outputText value="#{artistView.artist.name}"/></h2></header>
+                <div class="artist__grid">
+                    <h3>
+                        urodziny: <h:outputText styleClass="" value="#{artistView.artist.birthDate}"/>
+                    </h3>
+                    <h3>
+                        <h:outputText styleClass="" value="#{artistView.artist.alive?'Nadal żywy':'Martwy'}"/>
+                    </h3>
+                </div>
+
+                <header><h2>Paintings</h2></header>
+                <h:dataTable value="#{paintingList.paintings.paintings.stream().filter(p -> p.getArtist().equals(artistView.artist.name)).toList()}" var="painting" styleClass="data-table">
+                    <h:column>
+                        <f:facet name="header">Nazwa</f:facet>
+                        <h:outputText value="#{painting.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Id</f:facet>
+                        <h:link outcome="/painting/painting_view.xhtml" value="view">
+                            <f:param name="id" value="#{painting.id}"/>
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">liczba polubień</f:facet>
+                        <h:outputText value="#{painting.likes}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">edytuj</f:facet>
+                        <h:link outcome="/painting/painting_edit.xhtml" value="edytuj">
+                            <f:param name="id" value="#{painting.id}"/>
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">usuń</f:facet>
+                        <h:form>
+                            <h:commandButton styleClass="ui-button ui-control" value="usuń"
+                                             action="#{paintingList.deleteAction(painting)}"/>
+                        </h:form>
+                    </h:column>
+                </h:dataTable>
+
+            </article>
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>
